@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
 # deviseは先
 
-  resources :users,only: [:show,:index,:edit,:update]
+  resources :users,only: [:show,:index,:edit,:update] do
+   member do
+     get 'follows'
+     get 'followers'
+   end
+  end
   resources :relationships, only: [:create, :destroy]
-  get '/relationships/follows' => 'relationships#follows'
-  get '/relationships/followers' => 'relationships#followers'
+
 
 
 
